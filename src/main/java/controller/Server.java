@@ -4,6 +4,7 @@ import com.sun.net.httpserver.HttpServer;
 import model.IStorage;
 import model.LocalStorage;
 
+import javax.sound.midi.SysexMessage;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 
@@ -34,9 +35,11 @@ public class Server {
         Server.server.createContext("/", new HelloWorldHandler());
         Server.server.createContext("/user", new UserHandler());
         Server.server.start();
+        System.out.println("Server Started");
     }
 
     public static void closeServer() {
         Server.server.stop(0);
+        System.out.println("Server Closed");
     }
 }

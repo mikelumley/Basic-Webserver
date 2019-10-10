@@ -10,6 +10,7 @@ public class HelloWorldHandler implements HttpHandler {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
+        System.out.println("HelloWorld endpoint requested by: " + exchange.getRemoteAddress());
         HttpResponse response;
 
         if ("GET".equals(exchange.getRequestMethod())) {

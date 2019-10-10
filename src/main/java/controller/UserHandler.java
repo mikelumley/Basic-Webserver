@@ -9,11 +9,12 @@ import java.util.StringJoiner;
 public class UserHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
+        System.out.println("User endpoint requested by: " + exchange.getRemoteAddress());
         HttpRequest request = new HttpRequest(exchange);
         HttpResponse response;
         switch (exchange.getRequestMethod()) {
             default :
-                response = new HttpResponse(exchange, 405, "Unsupported Request");
+                response = new HttpResponse(exchange, 405, "Method Not Allowed");
                 break;
             case "GET" :
                 response = this.handleGetRequest(request);
@@ -47,7 +48,7 @@ public class UserHandler implements HttpHandler {
         if (success)
             return new HttpResponse(exchange, 200, "success");
         else
-            return new HttpResponse(exchange, 500, "failed");
+            return new HttpResponse(exchange, 400, "failed");
     }
 
     private HttpResponse handleDeleteRequest(HttpRequest request) {
@@ -57,7 +58,7 @@ public class UserHandler implements HttpHandler {
         if (success)
             return new HttpResponse(exchange, 200, "success");
         else
-            return new HttpResponse(exchange, 500, "failed");
+            return new HttpResponse(exchange, 400, "failed");
     }
 
     private HttpResponse handlePutRequest(HttpRequest request) {
